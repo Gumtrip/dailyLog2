@@ -14,7 +14,20 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
+    'thumb_img'=>[
+        'sm'=>[
+            'name'=>'sm',
+            'size'=>'320'
+        ],
+        'mid'=>[
+            'name'=>'mid',//1920/4=480,宽度取1920px
+            'size'=>'480'
+        ],
+        'big'=>[
+            'name'=>'big',
+            'size'=>'1920'
+        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -67,7 +80,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Shanghai',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,6 +174,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
 
         /*
          * Package Service Providers...

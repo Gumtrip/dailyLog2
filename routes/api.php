@@ -13,6 +13,44 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => 'v1',
+    'namespace' => 'Api',
+    'middleware' => 'throttle:' . config('api.rate_limits.access')
+], function () {
+    Route::group([
+        'prefix' => 'admin',
+        'namespace' => 'Admin'
+    ], function () {
+        Route::group(['namespace' => 'Article'], function () {
+            Route::resource('articles', 'ArticleController')->only(['index', 'store', 'show', 'update', 'destroy']);
+
+            Route::resource('article_categories', 'ArticleCategoryController')->only(['index', 'store', 'show', 'update', 'destroy']);
+            Route::get('article_category_trees', 'ArticleCategoryController@showTree');
+        });
+
+
+        Route::group(['namespace' => 'Admin'], function () {
+            Route::resource('admins', 'AdminController')->only(['show']);
+            Route::post('admin/me', 'AdminController@me');
+        });
+
+        Route::group(['namespace' => 'Image'], function () {
+            Route::post('image', 'ImageController@store');
+        });
+
+        Route::group(['namespace' => 'Auth', 'prefix' => 'auth'],function () {
+            Route::post('authorization', 'AuthorizationController@store');
+            Route::put('authorization', 'AuthorizationController@update');
+            Route::delete('authorization', 'AuthorizationController@destroy');
+        });
+    });
+
+
+
+    Route::group(['namespace'=>'Frontend'],function(){
+        Route::group(['namespace' => 'Article'], function () {
+            Route::resource('articles', 'ArticleController')->only(['index', 'show']);
+        });
+    });
 });
