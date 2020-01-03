@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Api\Admin\Admin;
-
 use App\Http\Requests\Admin\BackendRequest as Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Admin;

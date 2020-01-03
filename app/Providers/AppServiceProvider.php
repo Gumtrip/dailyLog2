@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Article\Article;
 use App\Observers\Article\ArticleObserver;
+use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Resource::withoutWrapping();
         Article::observe(ArticleObserver::class);
     }
 }

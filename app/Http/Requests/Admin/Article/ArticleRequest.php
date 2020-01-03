@@ -17,6 +17,7 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title'=>'required',
+            'category_id'=>'required',
             'intro'=>'required',
             'desc'=>'required',
             'image'=>'required',
