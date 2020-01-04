@@ -21,12 +21,14 @@ class ArticleObserver
      */
     public function created(Article $article)
     {
-        $uploadImageService = app (ImageHandleService::class);
-        $path = $uploadImageService->moveFile($article->image,self::FOLDER,$article->id);
-        $article->image = $path;
-        CompressImg::dispatch($article);//压缩图片
-        MoveImageFrTx::dispatch($article);//将富文本的图片移动到正确的位置
-        DB::table('articles')->where('id',$article->id)->update(['image'=>$path]);
+        if($article->image){
+            $uploadImageService = app (ImageHandleService::class);
+            $path = $uploadImageService->moveFile($article->image,self::FOLDER,$article->id);
+            $article->image = $path;
+            CompressImg::dispatch($article);//压缩图片
+            MoveImageFrTx::dispatch($article);//将富文本的图片移动到正确的位置
+            DB::table('articles')->where('id',$article->id)->update(['image'=>$path]);
+        }
     }
 
     /**
