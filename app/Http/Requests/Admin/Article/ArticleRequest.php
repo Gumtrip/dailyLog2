@@ -20,7 +20,6 @@ class ArticleRequest extends FormRequest
             'category_id'=>'required',
             'intro'=>'required',
             'desc'=>'required',
-            'image'=>'required',
         ];
     }
 }
