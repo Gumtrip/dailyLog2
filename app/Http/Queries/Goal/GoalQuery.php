@@ -4,7 +4,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use App\Models\Article\Article;
 
-class ArticleQuery extends QueryBuilder
+class GoalQuery extends QueryBuilder
 {
     public function __construct()
     {
@@ -15,7 +15,7 @@ class ArticleQuery extends QueryBuilder
             ->allowedFilters([
                 'title',
             ])
-        ->defaultSort('-id');
+            ->defaultSort('-id');
     }
 
 }

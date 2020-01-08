@@ -16,7 +16,7 @@ class CreateGoalsTable extends Migration
         Schema::create('goals', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title',100)->comment('名称');
-            $table->unsignedBigInteger('goal_category_id')->nullable()->comment('分类外键');
+            $table->unsignedBigInteger('category_id')->nullable()->comment('分类外键');
             $table->bigInteger('user_id')->unsigned()->nullable()->comment('用户Id');
             $table->string('remark',191)->nullable()->comment('备注');
             $table->unsignedBigInteger('reward_id')->nullable()->comment('奖品id，奖励可以是金钱，也可以是奖品');
