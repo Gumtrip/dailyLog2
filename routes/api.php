@@ -49,8 +49,22 @@ Route::group([
 
 
     Route::group(['namespace'=>'Frontend'],function(){
-        Route::group(['namespace' => 'Article'], function () {
-            Route::resource('articles', 'ArticleController')->only(['index', 'show']);
+
+        Route::group(['middleware'=>'auth'],function(){
+            Route::group(['namespace' => 'Goal'], function () {
+                Route::resource('goals', 'GoalController');
+                Route::resource('goal_categories', 'GoalCategoryController');
+                Route::get('goal_category_trees', 'GoalCategoryController@showTree');
+            });
         });
+
+
+
+        Route::group(['namespace' => 'Auth', 'prefix' => 'auth'],function () {
+            Route::post('authorization', 'AuthorizationController@store');
+            Route::put('authorization', 'AuthorizationController@update');
+            Route::delete('authorization', 'AuthorizationController@destroy');
+        });
+
     });
 });

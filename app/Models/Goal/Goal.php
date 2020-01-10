@@ -8,7 +8,7 @@ use App\Models\User\User;
 use Carbon\Carbon;
 class Goal extends Model
 {
-    protected $fillable=['title','remark','mission_amount','mission_accomplish_amount','start_at','gain_at','end_at','done_at','cancel_at','fail_at','bonus'];
+    protected $fillable=['title','category_id','remark','mission_amount','mission_accomplish_amount','start_at','gain_at','end_at','done_at','cancel_at','fail_at','bonus'];
     protected $casts=[
 
     ];
@@ -24,19 +24,13 @@ class Goal extends Model
         return $this->belongsTo(User::class);
     }
 
-    /** 是否达成目标
+
+    /** 能否获得奖品
      * @return bool
      */
-    public function getIsReachTheGoalAttribute(){
-        return $this->mission_accomplish_amount>=$this->mission_amount;
-    }
-
-
     public function getCanGetTheAwardsAttribute(){
         return $this->done_at&&$this->is_ahead_end_time&&is_null($this->gain_at);
     }
-
-
 
 
     /** 是否已经超过时间了

@@ -20,8 +20,8 @@ class CreateGoalsTable extends Migration
             $table->bigInteger('user_id')->unsigned()->nullable()->comment('用户Id');
             $table->string('remark',191)->nullable()->comment('备注');
             $table->unsignedBigInteger('reward_id')->nullable()->comment('奖品id，奖励可以是金钱，也可以是奖品');
-            $table->unsignedBigInteger('bonus')->default(0)->comment('奖金');
-            $table->integer('mission_amount')->comment('任务总数');
+            $table->decimal('bonus',10,2)->default(0)->comment('奖金');
+            $table->integer('mission_amount')->default(1)->comment('任务总数');
             $table->integer('mission_accomplish_amount')->default(0)->comment('完成任务总数');
             $table->timestamp('done_at')->nullable()->comment('完成时间');
             $table->timestamp('gain_at')->nullable()->comment('获取奖品时间');

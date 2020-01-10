@@ -86,12 +86,12 @@ class LogService
 
     function generateKeyLogCn($newProperties, $oldProperties, $keyCn)
     {
-        if ($newProperties&& $oldProperties) {
+        if ($newProperties!= $oldProperties) {
             $descString = '';
             foreach ($keyCn as $key => $cn) {
                 $newAttr = data_get($newProperties, $key);
-                $oldAttr = data_get($oldProperties, $key);
-                if(isset($newAttr)&&isset($oldAttr)){
+                $oldAttr = data_get($oldProperties, $key,'');
+                if(isset($newAttr)){
                     $descString .= $cn . ':' .$oldAttr  . '->' .$newAttr  . ';';
                 }
             }
@@ -125,6 +125,7 @@ class LogService
         $oldArray =data_get($properties,'old',[]) ;
         $description='【更新】';
         $keyDescriptionCn = $this->generateKeyLogCn($newArray,$oldArray,$keyCn);
+
         if($keyDescriptionCn)$description.=$keyDescriptionCn;
         return $description;
     }

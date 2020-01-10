@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Frontend\Message;
+namespace App\Http\Requests\Api\Frontend\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MessageRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class MessageRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth('api')->check();
     }
 
     /**
@@ -24,9 +24,7 @@ class MessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'required|email',
-            'name'=>'required',
-            'msg'=>'required'
+            'username'=>'required'
         ];
     }
 }
