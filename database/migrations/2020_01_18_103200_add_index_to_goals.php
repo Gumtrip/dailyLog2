@@ -15,6 +15,7 @@ class AddIndexToGoals extends Migration
     {
         Schema::table('goals', function (Blueprint $table) {
             $table->index('category_id');
+            $table->index(['user_id','category_id']);
         });
     }
 
@@ -27,6 +28,7 @@ class AddIndexToGoals extends Migration
     {
         Schema::table('goals', function (Blueprint $table) {
             $table->dropIndex('category_id');
+            $table->dropIndex(['user_id','category_id']);
         });
     }
 }

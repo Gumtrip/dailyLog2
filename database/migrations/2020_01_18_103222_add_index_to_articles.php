@@ -15,6 +15,8 @@ class AddIndexToArticles extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->index('category_id');
+            $table->index(['user_id','category_id']);
+
         });
     }
 
@@ -27,6 +29,7 @@ class AddIndexToArticles extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->dropIndex('category_id');
+            $table->dropIndex(['user_id','category_id']);
         });
     }
 }
