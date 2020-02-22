@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIndexToArticles extends Migration
+class CreateSkillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class AddIndexToArticles extends Migration
      */
     public function up()
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->index('category_id');
-
+        Schema::create('skills', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('title',100)->comment('名称');
+            $table->nestedSet();
+            $table->timestamps();
         });
     }
 
@@ -26,8 +28,6 @@ class AddIndexToArticles extends Migration
      */
     public function down()
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->dropIndex('category_id');
-        });
+        Schema::dropIfExists('skills');
     }
 }
