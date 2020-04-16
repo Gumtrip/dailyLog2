@@ -110,7 +110,7 @@ class ImageHandleService
     {
         foreach ($matches[1] as $image) {
             $realPath = $this->imageRealPath($image);
-            $path = $this->moveFile($realPath, $folder, $id);
+            $path = config('app.url') .$this->moveFile($realPath, $folder, $id);
             //这里很笨，直接遍历整个content 然后替换掉image
             //图片多后者富文本内容多，会有效率问题
             //TODO 找更好的方法一次替换，而不是通过遍历替换
